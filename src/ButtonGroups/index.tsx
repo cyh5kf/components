@@ -18,6 +18,7 @@ interface ButtonGroupsType extends ButtonGroupProps {
   mode: 'ButtonGroup' | 'ButtonMenu';
   showSize: number;
   viewMode: 'text' | 'icon' | 'both'; //todo
+  getPopupContainer: (triggerNode: HTMLElement) => HTMLElement;
 }
 
 interface ConfirmType extends ModalFuncProps {
@@ -174,7 +175,7 @@ export class ButtonGroups extends React.Component<ButtonGroupsType> {
     );
   }
   renderMixButtonMenu(): React.ReactNode {
-    let {children, showSize} = this.props;
+    let {children, showSize, overlayClassName} = this.props;
     let childrenArray = React.Children.toArray(children);
     let endArray = childrenArray.splice(showSize);
     return (
@@ -182,7 +183,9 @@ export class ButtonGroups extends React.Component<ButtonGroupsType> {
         {childrenArray.map((it, idx) => {
           return this.renderReactElement(it, idx);
         })}
-        <Dropdown overlay={this.renderMenuItem(endArray)}>
+        <Dropdown
+          overlayClassName={overlayClassName}
+          overlay={this.renderMenuItem(endArray)}>
           <Button>
             <Icon type='ellipsis' />
           </Button>

@@ -50,7 +50,12 @@ stories.add('按钮组超出折叠', () => {
     }
   };
   return (
-    <ButtonGroups handleClick={handlerMenu} showSize={3} mode='ButtonMenu'>
+    <ButtonGroups
+      className='role_options'
+      handleClick={handlerMenu}
+      showSize={3}
+      mode='ButtonMenu'
+      overlayClassName='role-options-extra'>
       <CustomButton
         actionkey='click1'
         confirm={<CustomButton>测试</CustomButton>}
